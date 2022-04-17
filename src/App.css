@@ -1,4 +1,4 @@
-a {
+/* a {
   text-decoration: none;
 }
 
@@ -35,4 +35,13 @@ body {
 
 #recaptcha-container {
   margin: 20px;
+} */
+
+img {
+  width: 100%;
+  height: auto;
+}
+#imgg {
+  background-image: "https://s01.sgp1.cdn.digitaloceanspaces.com/article/107877-fzvvbytkwp-1544538084.jpg";
+ 
 }
