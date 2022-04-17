@@ -20,6 +20,7 @@ export const Header = () => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl2, setAnchorEl2] = React.useState(null);
+  const [anchorEl3, setAnchorEl3] = React.useState(null);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,12 +28,18 @@ export const Header = () => {
   const handleMenu2 = (event) => {
     setAnchorEl2(event.currentTarget);
   };
+  const handleMenu3 = (event) => {
+    setAnchorEl3(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
   const handleClose2 = () => {
     setAnchorEl2(null);
+  };
+  const handleClose3 = () => {
+    setAnchorEl3(null);
   };
 
   const navigate = useNavigate();
@@ -54,6 +61,9 @@ export const Header = () => {
   };
   const navDashbord = () => {
     navigate("/");
+  };
+  const navHome = () => {
+    navigate("/home");
   };
 
   const handleLogout = async () => {
@@ -117,12 +127,32 @@ export const Header = () => {
           </Menu>
         </div>
         {!user && (
-          <Button onClick={handleLogin} color="inherit">
-            {" "}
-            <Typography variant="h" component="div" sx={{ flexGrow: 1 }}>
-              Login
-            </Typography>{" "}
-          </Button>
+          <div>
+            <Button onClick={handleMenu3} color="inherit">
+              {" "}
+              <Typography variant="h" component="div" sx={{ flexGrow: 1 }}>
+                Login
+              </Typography>{" "}
+            </Button>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl3}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl3)}
+              onClose={handleClose3}
+            >
+              <MenuItem onClick={handleLogin}>As Donor</MenuItem>
+              <MenuItem onClick={navHome}>As NGO</MenuItem>
+            </Menu>
+          </div>
         )}
         {user && (
           <div>

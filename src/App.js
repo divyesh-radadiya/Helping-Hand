@@ -14,14 +14,7 @@ function App() {
   return (
     <UserAuthContextProvider>
       <Routes>
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/home" element={<Home />} />
         <Route path="/" element={<Dashbord />} />
         <Route path="/phonesignup" element={<PhoneSignUp />} />
         <Route
