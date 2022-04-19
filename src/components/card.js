@@ -43,17 +43,19 @@ export default function RequestCard() {
   };
 
   return (
-    <Card>
+    <Card
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        p: 2,
+        borderRadius: 4,
+      }}
+    >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             R
           </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
         }
         title="Shrimp and Chorizo Paella"
         subheader="September 14, 2016"

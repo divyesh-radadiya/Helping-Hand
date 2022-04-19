@@ -68,8 +68,13 @@ export const Header = () => {
 
   const handleLogout = async () => {
     try {
+      console.log("*******");
+
       await logOut();
+      console.log("*******");
+
       navigate("/");
+      console.log("*******");
     } catch (error) {
       console.log(error.message);
     }

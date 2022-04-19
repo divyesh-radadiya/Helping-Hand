@@ -9,14 +9,24 @@ import FoodDonaton from "./components/FoodDonation";
 import Volunteers from "./components/Volunteers";
 import IndividualDonation from "./components/IndividualDonation";
 import ClothesDonation from "./components/ClothesDonation";
+import EmailSignin from "./components/EmailSignIn";
+import NGOProtectedRoute from "./components/NGOProctedPoute";
 
 function App() {
   return (
     <UserAuthContextProvider>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <NGOProtectedRoute>
+              <Home />
+            </NGOProtectedRoute>
+          }
+        />
         <Route path="/" element={<Dashbord />} />
         <Route path="/phonesignup" element={<PhoneSignUp />} />
+        <Route path="/emailsignin" element={<EmailSignin />} />
         <Route
           path="/foodDonation"
           element={

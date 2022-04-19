@@ -1,28 +1,13 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import React from "react";
-import { Button, FormLabel } from "react-bootstrap";
-import { useNavigate } from "react-router";
-import { useUserAuth } from "../context/UserAuthContext";
 import { Header } from "./header";
 import bgi from "../img/bgi.jpg";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import RequestCard from "./card";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { RequestList } from "./RequestsList";
+import { DonationList } from "./DonationList";
+import { EnquiryList } from "./EnquiryList";
+import { AllRequestList } from "./AllRequestsList";
 
 function a11yProps(index) {
   return {
@@ -32,13 +17,6 @@ function a11yProps(index) {
 }
 
 const Home = () => {
-  const { logOut, user } = useUserAuth();
-
-  const navigate = useNavigate();
-
-  const navIndividualDonation = () => {
-    navigate("/individualDonation");
-  };
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -61,7 +39,7 @@ const Home = () => {
           flexDirection: "row",
           p: 2,
           mx: "10%",
-          pt: "40%",
+          pt: "30%",
           borderRadius: 1,
         }}
       >
@@ -88,6 +66,8 @@ const Home = () => {
             >
               <Tab label="Requests" {...a11yProps(0)} />
               <Tab label="All Requests" {...a11yProps(1)} />
+              <Tab label="All Donation" {...a11yProps(2)} />
+              <Tab label="All Enquiry" {...a11yProps(3)} />
             </Tabs>
           </Box>
 
@@ -106,31 +86,7 @@ const Home = () => {
               background: "#f3f3f3",
             }}
           >
-            <Table aria-label="simple table">
-              <TableBody>
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell colSpan={2} component="th" scope="row">
-                    <RequestCard></RequestCard>
-                  </TableCell>
-                </TableRow>{" "}
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell colSpan={2} component="th" scope="row">
-                    <RequestCard></RequestCard>
-                  </TableCell>
-                </TableRow>{" "}
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell colSpan={2} component="th" scope="row">
-                    <RequestCard></RequestCard>
-                  </TableCell>
-                </TableRow>{" "}
-              </TableBody>
-            </Table>
+            <RequestList></RequestList>
           </Paper>
 
           <Paper
@@ -148,31 +104,43 @@ const Home = () => {
               background: "#f3f3f3",
             }}
           >
-            <Table aria-label="simple table">
-              <TableBody>
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell colSpan={2} component="th" scope="row">
-                    <RequestCard></RequestCard>
-                  </TableCell>
-                </TableRow>{" "}
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell colSpan={2} component="th" scope="row">
-                    <RequestCard></RequestCard>
-                  </TableCell>
-                </TableRow>{" "}
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell colSpan={2} component="th" scope="row">
-                    <RequestCard></RequestCard>
-                  </TableCell>
-                </TableRow>{" "}
-              </TableBody>
-            </Table>
+            <AllRequestList></AllRequestList>
+          </Paper>
+
+          <Paper
+            hidden={value !== 2}
+            style={{
+              textAlign: "left",
+              color: "black",
+              width: "100%",
+            }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              p: 6,
+              borderRadius: 4,
+              background: "#f3f3f3",
+            }}
+          >
+            <DonationList></DonationList>
+          </Paper>
+
+          <Paper
+            hidden={value !== 3}
+            style={{
+              textAlign: "left",
+              color: "black",
+              width: "100%",
+            }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              p: 6,
+              borderRadius: 4,
+              background: "#f3f3f3",
+            }}
+          >
+            <EnquiryList></EnquiryList>
           </Paper>
         </Paper>
       </Box>
