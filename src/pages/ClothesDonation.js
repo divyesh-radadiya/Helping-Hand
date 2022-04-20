@@ -7,19 +7,146 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Snackbar,
   Table,
   TableBody,
   TableCell,
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
 // import { useUserAuth } from "../context/UserAuthContext";
-import { Header } from "./header";
+import { Header } from "../components/header";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ClothesDonation = () => {
   // const { logOut, user } = useUserAuth();
+  const nameRef = useRef(null);
+  const mobileRef = useRef(null);
+  const emailRef = useRef(null);
+  const add1Ref = useRef(null);
+  const add2Ref = useRef(null);
+  const pincodeRef = useRef(null);
+  const cityRef = useRef(null);
+  const itemNameRef = useRef(null);
+  const quantityRef = useRef(null);
+  const dateRef = useRef(null);
+  const detailsRef = useRef(null);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
+  const [type, setType] = useState("");
+  const handleRadioChange1 = (event) => {
+    setType(event.target.value);
+  };
+  const [traMod, setTraMod] = useState("");
+  const handleRadioChange2 = (event) => {
+    setTraMod(event.target.value);
+  };
+
+  const saveHandler = () => {
+    const name = nameRef.current?.value;
+    const mobile = mobileRef.current?.value;
+    const email = emailRef.current?.value;
+    const add1 = add1Ref.current?.value;
+    const add2 = add2Ref.current?.value;
+    const pincode = pincodeRef.current?.value;
+    const city = cityRef.current?.value;
+    const itemName = itemNameRef.current?.value;
+    const quantity = quantityRef.current?.value;
+    const date = dateRef.current?.value;
+    const details = detailsRef.current?.value;
+
+    console.log(date);
+    console.log(traMod);
+    console.log(type);
+    console.log(quantity);
+    console.log(itemName);
+
+    if (
+      !name ||
+      !mobile ||
+      !email ||
+      !add1 ||
+      !add2 ||
+      !pincode ||
+      !city ||
+      !itemName ||
+      !quantity ||
+      !type ||
+      !traMod ||
+      !date ||
+      !details ||
+      name.toString().trim().length === 0 ||
+      mobile.toString().trim().length === 0 ||
+      email.toString().trim().length === 0 ||
+      add1.toString().trim().length === 0 ||
+      add2.toString().trim().length === 0 ||
+      pincode.toString().trim().length === 0 ||
+      city.toString().trim().length === 0 ||
+      itemName.toString().trim().length === 0 ||
+      quantity.toString().trim().length === 0 ||
+      type.toString().trim().length === 0 ||
+      traMod.toString().trim().length === 0 ||
+      date.toString().trim().length === 0 ||
+      details.toString().trim().length === 0
+    ) {
+      setError("Please enter a valid data.");
+      return;
+    }
+    setError("");
+
+    var data = JSON.stringify({
+      address1: add1,
+      address2: add2,
+      city: city,
+      pinCode: pincode,
+      role: "Clothes",
+      name: name,
+      mobile: mobile,
+      emailId: email,
+      details: details,
+      itemName: itemName,
+      quantity: quantity,
+      type: type,
+      traMod: traMod,
+      status: "Request",
+      isAccepted: false,
+      date: new Date().toLocaleDateString("en-CA"),
+      targetDate: date,
+    });
+
+    var config = {
+      method: "post",
+      url: "http://localhost:8080/api/request/add",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setOpen(true);
+        navigate("/");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // props.onSave(enteredTitle.toString(), new Date(selectedDate));
+  };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <div
       style={{
@@ -28,6 +155,12 @@ const ClothesDonation = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Data updated successfully !!"
+      />
       <Header></Header>
 
       <Box
@@ -114,7 +247,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Full name"
+                        placeholder="Full name*"
+                        inputRef={nameRef}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -136,8 +270,10 @@ const ClothesDonation = () => {
                       }}
                     >
                       <InputBase
+                        type="number"
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Mobile No"
+                        placeholder="Mobile No*"
+                        inputRef={mobileRef}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -156,7 +292,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Email id"
+                        placeholder="Email id*"
+                        inputRef={emailRef}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -194,7 +331,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Address line 1"
+                        placeholder="Address line 1*"
+                        inputRef={add1Ref}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -218,7 +356,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Address line 2"
+                        placeholder="Address line 2*"
+                        inputRef={add2Ref}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -241,7 +380,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="City"
+                        placeholder="City*"
+                        inputRef={cityRef}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -259,9 +399,13 @@ const ClothesDonation = () => {
                       }}
                     >
                       <InputBase
+                        type="number"
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Pincode"
-                        inputProps={{ "aria-label": "Full name" }}
+                        placeholder="Pincode*"
+                        inputRef={pincodeRef}
+                        inputProps={{
+                          "aria-label": "Full name",
+                        }}
                       />
                     </Paper>
                   </TableCell>
@@ -275,7 +419,7 @@ const ClothesDonation = () => {
                       component="div"
                       sx={{ flexGrow: 1, p: 2 }}
                     >
-                      Clothes details
+                      Food details
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -298,6 +442,7 @@ const ClothesDonation = () => {
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
                         placeholder="Item name"
+                        inputRef={itemNameRef}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -320,7 +465,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Quantity"
+                        placeholder="Quantity(KG)"
+                        inputRef={quantityRef}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -339,7 +485,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Date(dd/mm/yyyy)"
+                        placeholder="Date(yyyy-MM-dd)"
+                        inputRef={dateRef}
                         inputProps={{ "aria-label": "Full name" }}
                       />
                     </Paper>
@@ -360,6 +507,7 @@ const ClothesDonation = () => {
                       row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
+                      onChange={handleRadioChange1}
                     >
                       <FormControlLabel
                         value="newclothes"
@@ -385,6 +533,7 @@ const ClothesDonation = () => {
                       row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
+                      onChange={handleRadioChange2}
                     >
                       <FormControlLabel
                         value="dropbyself"
@@ -416,7 +565,8 @@ const ClothesDonation = () => {
                     >
                       <InputBase
                         sx={{ m: 1, ml: 4, flex: 1 }}
-                        placeholder="Write details here"
+                        placeholder="Write details here*"
+                        inputRef={detailsRef}
                         inputProps={{ "aria-label": "Write-details-here" }}
                         multiline
                         rows={2}
@@ -426,7 +576,13 @@ const ClothesDonation = () => {
                 </TableRow>
               </TableBody>
             </Table>
+            {error && (
+              <Typography variant="h6" component="div">
+                {error}
+              </Typography>
+            )}
             <Button
+              onClick={saveHandler}
               variant="contained"
               sx={{ m: 1, background: "#1a237e", borderRadius: 4 }}
             >

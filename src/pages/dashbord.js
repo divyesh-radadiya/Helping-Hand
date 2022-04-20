@@ -1,7 +1,7 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
 import React from "react";
 import bgi from "../img/bgi.jpg";
-import { Header } from "./header";
+import { Header } from "../components/header";
 import { useNavigate } from "react-router";
 
 const Dashbord = () => {

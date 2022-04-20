@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./components/Home";
-import PhoneSignUp from "./components/PhoneSignUp";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
+import PhoneSignUp from "./pages/PhoneSignUp";
+import ProtectedRoute from "./pages/ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
-import Dashbord from "./components/dashbord";
-import FoodDonaton from "./components/FoodDonation";
-import Volunteers from "./components/Volunteers";
-import IndividualDonation from "./components/IndividualDonation";
-import ClothesDonation from "./components/ClothesDonation";
-import EmailSignin from "./components/EmailSignIn";
-import NGOProtectedRoute from "./components/NGOProctedPoute";
+import Dashbord from "./pages/dashbord";
+import FoodDonaton from "./pages/FoodDonation";
+import Volunteers from "./pages/Volunteers";
+import IndividualDonation from "./pages/IndividualDonation";
+import ClothesDonation from "./pages/ClothesDonation";
+import EmailSignin from "./pages/EmailSignIn";
+import NGOProtectedRoute from "./pages/NGOProctedPoute";
 
 function App() {
   return (

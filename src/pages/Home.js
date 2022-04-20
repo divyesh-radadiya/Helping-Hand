@@ -1,13 +1,13 @@
 import { Box, Paper } from "@mui/material";
 import React from "react";
-import { Header } from "./header";
+import { Header } from "../components/header";
 import bgi from "../img/bgi.jpg";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { RequestList } from "./RequestsList";
-import { DonationList } from "./DonationList";
-import { EnquiryList } from "./EnquiryList";
-import { AllRequestList } from "./AllRequestsList";
+import { RequestList } from "../components/RequestsList";
+import { DonationList } from "../components/DonationList";
+import { EnquiryList } from "../components/EnquiryList";
+import { AllRequestList } from "../components/AllRequestsList";
 
 function a11yProps(index) {
   return {
