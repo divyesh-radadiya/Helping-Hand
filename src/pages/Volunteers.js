@@ -89,7 +89,6 @@ const Volunteers = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
-        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
@@ -103,7 +102,7 @@ const Volunteers = () => {
     if (reason === "clickaway") {
       return;
     }
-
+    navigate("/");
     setOpen(false);
   };
   return (
@@ -116,7 +115,7 @@ const Volunteers = () => {
     >
       <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleClose}
         message="Data updated successfully !!"
       />

@@ -1,5 +1,5 @@
 import { Box, Paper } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "../components/header";
 import bgi from "../img/bgi.jpg";
 import Tabs from "@mui/material/Tabs";
@@ -8,6 +8,7 @@ import { RequestList } from "../components/RequestsList";
 import { DonationList } from "../components/DonationList";
 import { EnquiryList } from "../components/EnquiryList";
 import { AllRequestList } from "../components/AllRequestsList";
+import axios from "axios";
 
 function a11yProps(index) {
   return {
@@ -21,6 +22,68 @@ const Home = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  const [requestList, setRequestList] = useState([]);
+  const [donationList, setDonationList] = useState([]);
+  const [enquiryList, setEnquiryList] = useState([]);
+  const [allRequestList, setAllRequestList] = useState([]);
+
+  const getData = () => {
+    var config = {
+      method: "get",
+      url: "http://localhost:8080/api/ngo/getNgo",
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        setRequestList(() => {
+          return [];
+        });
+
+        response.data["requests"].forEach((curReq) => {
+          setRequestList((reqs) => {
+            return reqs.concat(curReq);
+          });
+        });
+
+        setAllRequestList(() => {
+          return [];
+        });
+
+        response.data["requests"].forEach((curReq) => {
+          setAllRequestList((reqs) => {
+            return reqs.concat(curReq);
+          });
+        });
+
+        setDonationList(() => {
+          return [];
+        });
+
+        response.data["donors"].forEach((curReq) => {
+          setDonationList((reqs) => {
+            return reqs.concat(curReq);
+          });
+        });
+
+        setEnquiryList(() => {
+          return [];
+        });
+
+        response.data["volunteers"].forEach((curReq) => {
+          setEnquiryList((reqs) => {
+            return reqs.concat(curReq);
+          });
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -86,7 +149,7 @@ const Home = () => {
               background: "#f3f3f3",
             }}
           >
-            <RequestList></RequestList>
+            <RequestList requestList={requestList}></RequestList>
           </Paper>
 
           <Paper
@@ -104,7 +167,7 @@ const Home = () => {
               background: "#f3f3f3",
             }}
           >
-            <AllRequestList></AllRequestList>
+            <AllRequestList requestList={allRequestList}></AllRequestList>
           </Paper>
 
           <Paper
@@ -122,7 +185,7 @@ const Home = () => {
               background: "#f3f3f3",
             }}
           >
-            <DonationList></DonationList>
+            <DonationList donationList={donationList}></DonationList>
           </Paper>
 
           <Paper
@@ -140,7 +203,7 @@ const Home = () => {
               background: "#f3f3f3",
             }}
           >
-            <EnquiryList></EnquiryList>
+            <EnquiryList enquiryList={enquiryList}></EnquiryList>
           </Paper>
         </Paper>
       </Box>

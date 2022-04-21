@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   Button,
   ListItem,
@@ -35,9 +34,8 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RequestCard() {
+export default function RequestCard({ request }) {
   const [expanded, setExpanded] = React.useState(false);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
