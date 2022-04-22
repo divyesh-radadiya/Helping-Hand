@@ -34,7 +34,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RequestCard({ request }) {
+export default function DonationCard({ donation }) {
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -46,6 +46,7 @@ export default function RequestCard({ request }) {
         display: "flex",
         flexDirection: "column",
         p: 2,
+        m: 2,
         borderRadius: 4,
       }}
     >
@@ -55,8 +56,7 @@ export default function RequestCard({ request }) {
             R
           </Avatar>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={donation.name}
       />
 
       <CardContent>
@@ -67,43 +67,27 @@ export default function RequestCard({ request }) {
             >
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Apple" />
-                  </ListItemButton>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={donation.transactionId} />
                 </ListItem>
               </TableCell>
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Quantity: 2" />
-                  </ListItemButton>
-                </ListItem>
-              </TableCell>
-              <TableCell component="th" scope="row">
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="September 14, 2016" />
-                  </ListItemButton>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={donation.emailId} />
                 </ListItem>
               </TableCell>
 
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Pickup" />
-                  </ListItemButton>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={donation.mobile} />
                 </ListItem>
               </TableCell>
             </TableRow>
@@ -111,7 +95,7 @@ export default function RequestCard({ request }) {
         </Table>
       </CardContent>
       <CardActions disableSpacing>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, p: 2 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, px: 3 }}>
           Details
         </Typography>
         <ExpandMore
@@ -132,35 +116,20 @@ export default function RequestCard({ request }) {
               >
                 <TableCell colSpan={2} component="th" scope="row">
                   <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <DraftsIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Full Name" />
-                    </ListItemButton>
-                  </ListItem>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <DraftsIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Email" />
-                    </ListItemButton>
-                  </ListItem>
-                </TableCell>
-
-                <TableCell component="th" scope="row">
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <DraftsIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Mobile" />
-                    </ListItemButton>
+                    <ListItemIcon>
+                      <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        donation.address1 +
+                        ", " +
+                        donation.address2 +
+                        ", " +
+                        donation.city +
+                        ". " +
+                        donation.pinCode
+                      }
+                    />
                   </ListItem>
                 </TableCell>
               </TableRow>
@@ -169,26 +138,10 @@ export default function RequestCard({ request }) {
               >
                 <TableCell colSpan={2} component="th" scope="row">
                   <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <DraftsIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Address" />
-                    </ListItemButton>
-                  </ListItem>
-                </TableCell>
-              </TableRow>
-              <TableRow
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell colSpan={2} component="th" scope="row">
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <DraftsIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Details" />
-                    </ListItemButton>
+                    <ListItemIcon>
+                      <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={donation.details} />
                   </ListItem>
                 </TableCell>
               </TableRow>
@@ -199,7 +152,7 @@ export default function RequestCard({ request }) {
             sx={{ m: 1, background: "#1a237e", borderRadius: 4 }}
           >
             <Typography variant="h6" component="div">
-              Request accept
+              Delete
             </Typography>
           </Button>
         </CardContent>

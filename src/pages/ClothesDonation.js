@@ -111,7 +111,7 @@ const ClothesDonation = () => {
       quantity: quantity,
       type: type,
       traMod: traMod,
-      status: "Request",
+      status: "Requested",
       isAccepted: false,
       date: new Date().toLocaleDateString("en-CA"),
       targetDate: date,
@@ -130,7 +130,6 @@ const ClothesDonation = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
-        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
@@ -144,6 +143,7 @@ const ClothesDonation = () => {
     if (reason === "clickaway") {
       return;
     }
+    navigate("/");
 
     setOpen(false);
   };
@@ -510,12 +510,12 @@ const ClothesDonation = () => {
                       onChange={handleRadioChange1}
                     >
                       <FormControlLabel
-                        value="newclothes"
+                        value="New clothes"
                         control={<Radio />}
                         label="New clothes"
                       />
                       <FormControlLabel
-                        value="usedclothes"
+                        value="Used clothes"
                         control={<Radio />}
                         label="Used clothes"
                       />
@@ -536,12 +536,12 @@ const ClothesDonation = () => {
                       onChange={handleRadioChange2}
                     >
                       <FormControlLabel
-                        value="dropbyself"
+                        value="Drop by self"
                         control={<Radio />}
                         label="Drop by self"
                       />
                       <FormControlLabel
-                        value="pickup"
+                        value="Pick up"
                         control={<Radio />}
                         label="Pick up"
                       />

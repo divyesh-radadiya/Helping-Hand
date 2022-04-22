@@ -46,9 +46,10 @@ const Home = () => {
         });
 
         response.data["requests"].forEach((curReq) => {
-          setRequestList((reqs) => {
-            return reqs.concat(curReq);
-          });
+          if (curReq.status == "Requested")
+            setRequestList((reqs) => {
+              return reqs.concat(curReq);
+            });
         });
 
         setAllRequestList(() => {
@@ -56,9 +57,10 @@ const Home = () => {
         });
 
         response.data["requests"].forEach((curReq) => {
-          setAllRequestList((reqs) => {
-            return reqs.concat(curReq);
-          });
+          if (curReq.status != "Requested")
+            setAllRequestList((reqs) => {
+              return reqs.concat(curReq);
+            });
         });
 
         setDonationList(() => {
@@ -128,7 +130,7 @@ const Home = () => {
               aria-label="basic tabs example"
             >
               <Tab label="Requests" {...a11yProps(0)} />
-              <Tab label="All Requests" {...a11yProps(1)} />
+              <Tab label="Old Requests" {...a11yProps(1)} />
               <Tab label="All Donation" {...a11yProps(2)} />
               <Tab label="All Enquiry" {...a11yProps(3)} />
             </Tabs>

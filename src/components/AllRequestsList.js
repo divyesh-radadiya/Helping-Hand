@@ -1,6 +1,6 @@
 import { List } from "@mui/material";
 
-import RequestCard from "./card";
+import RequestCard from "./requestCard";
 
 export const AllRequestList = ({ requestList }) => {
   return (

@@ -1,12 +1,11 @@
 import { List } from "@mui/material";
-
-import RequestCard from "./card";
+import DonationCard from "./donationCard";
 
 export const DonationList = ({ donationList }) => {
   return (
     <List>
       {donationList.map((req) => {
-        return <RequestCard key={req.userId} request={req}></RequestCard>;
+        return <DonationCard key={req.userId} donation={req}></DonationCard>;
       })}
     </List>
   );

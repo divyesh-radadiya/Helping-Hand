@@ -93,7 +93,6 @@ const IndividualDonation = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
-        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
@@ -107,7 +106,7 @@ const IndividualDonation = () => {
     if (reason === "clickaway") {
       return;
     }
-
+    navigate("/");
     setOpen(false);
   };
   return (

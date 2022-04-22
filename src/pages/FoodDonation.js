@@ -113,7 +113,7 @@ const FoodDonaton = () => {
       quantity: quantity,
       type: type,
       traMod: traMod,
-      status: "Request",
+      status: "Requested",
       isAccepted: false,
       date: new Date().toLocaleDateString("en-CA"),
       targetDate: date,
@@ -132,7 +132,6 @@ const FoodDonaton = () => {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
-        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
@@ -146,7 +145,7 @@ const FoodDonaton = () => {
     if (reason === "clickaway") {
       return;
     }
-
+    navigate("/");
     setOpen(false);
   };
   return (
@@ -512,12 +511,12 @@ const FoodDonaton = () => {
                       onChange={handleRadioChange1}
                     >
                       <FormControlLabel
-                        value="rawfood"
+                        value="Raw Food"
                         control={<Radio />}
                         label="Raw Food"
                       />
                       <FormControlLabel
-                        value="cookedfood"
+                        value="Cooked Food"
                         control={<Radio />}
                         label="Cooked Food"
                       />
@@ -538,12 +537,12 @@ const FoodDonaton = () => {
                       name="row-radio-buttons-group"
                     >
                       <FormControlLabel
-                        value="dropbyself"
+                        value="Drop by self"
                         control={<Radio />}
                         label="Drop by self"
                       />
                       <FormControlLabel
-                        value="pickup"
+                        value="Pick up"
                         control={<Radio />}
                         label="Pick up"
                       />
