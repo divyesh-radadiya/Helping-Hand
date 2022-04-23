@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { base } from "../components/baseUrl";
 
 // import { useUserAuth } from "../context/UserAuthContext";
 import { Header } from "../components/header";
@@ -82,7 +83,7 @@ const IndividualDonation = () => {
 
     var config = {
       method: "post",
-      url: "http://localhost:8080/api/donor/add",
+      url: base + "/api/donor/add",
       headers: {
         "Content-Type": "application/json",
       },

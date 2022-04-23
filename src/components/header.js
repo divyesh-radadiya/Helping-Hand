@@ -15,6 +15,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 
 import { ReactComponent as Logo } from "../img/logo.svg";
 import axios from "axios";
+import { base } from "./baseUrl";
 
 export const Header = () => {
   const { logOut, user } = useUserAuth();
@@ -80,7 +81,7 @@ export const Header = () => {
   const onFun = () => {
     var config = {
       method: "get",
-      url: "http://localhost:8080/api/ngo/getNgo",
+      url: base + "/api/ngo/getNgo",
       headers: {},
     };
 

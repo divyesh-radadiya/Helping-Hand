@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 // import { useUserAuth } from "../context/UserAuthContext";
 import bgi from "../img/bgi.jpg";
 import axios from "axios";
+import { base } from "../components/baseUrl";
 
 const FoodDonaton = () => {
   // const { logOut, user } = useUserAuth();
@@ -121,7 +122,7 @@ const FoodDonaton = () => {
 
     var config = {
       method: "post",
-      url: "http://localhost:8080/api/request/add",
+      url: base + "/api/request/add",
       headers: {
         "Content-Type": "application/json",
       },

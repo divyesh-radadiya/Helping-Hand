@@ -25,6 +25,7 @@ import {
 import DraftsIcon from "@mui/icons-material/Drafts";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { base } from "./baseUrl";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -45,7 +46,7 @@ export default function RequestCard({ request }) {
   const onAccept = () => {
     var config = {
       method: "get",
-      url: "http://localhost:8080/api/request/setStatus/" + request.userId,
+      url: base + "/api/request/setStatus/" + request.userId,
       headers: {},
     };
 
@@ -61,7 +62,7 @@ export default function RequestCard({ request }) {
   const onDecline = () => {
     var config = {
       method: "get",
-      url: "http://localhost:8080/api/request/unsetStatus/" + request.userId,
+      url: base + "api/request/unsetStatus/" + request.userId,
       headers: {},
     };
 

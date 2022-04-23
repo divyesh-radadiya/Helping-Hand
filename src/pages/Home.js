@@ -9,6 +9,7 @@ import { DonationList } from "../components/DonationList";
 import { EnquiryList } from "../components/EnquiryList";
 import { AllRequestList } from "../components/AllRequestsList";
 import axios from "axios";
+import { base } from "../components/baseUrl";
 
 function a11yProps(index) {
   return {
@@ -34,7 +35,7 @@ const Home = () => {
   const getData = () => {
     var config = {
       method: "get",
-      url: "http://localhost:8080/api/ngo/getNgo",
+      url: base + "/api/ngo/getNgo",
       headers: {},
     };
 

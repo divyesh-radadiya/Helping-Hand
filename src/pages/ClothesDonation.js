@@ -19,6 +19,7 @@ import { Header } from "../components/header";
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { base } from "../components/baseUrl";
 
 const ClothesDonation = () => {
   // const { logOut, user } = useUserAuth();
@@ -119,7 +120,7 @@ const ClothesDonation = () => {
 
     var config = {
       method: "post",
-      url: "http://localhost:8080/api/request/add",
+      url: base + "/api/request/add",
       headers: {
         "Content-Type": "application/json",
       },
