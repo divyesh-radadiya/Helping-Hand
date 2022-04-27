@@ -11,6 +11,7 @@ import IndividualDonation from "./pages/IndividualDonation";
 import ClothesDonation from "./pages/ClothesDonation";
 import EmailSignin from "./pages/EmailSignIn";
 import NGOProtectedRoute from "./pages/NGOProctedPoute";
+import MyRequests from "./pages/MyRequests";
 
 function App() {
   return (
@@ -25,8 +26,18 @@ function App() {
           }
         />
         <Route path="/" element={<Dashbord />} />
+        <Route path="/dashbord" element={<Dashbord />} />
         <Route path="/phonesignup" element={<PhoneSignUp />} />
         <Route path="/emailsignin" element={<EmailSignin />} />
+
+        <Route
+          path="/myRequests"
+          element={
+            <ProtectedRoute>
+              <MyRequests />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/foodDonation"
           element={

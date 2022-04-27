@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useUserAuth } from "../context/UserAuthContext";
+import { Box, Button, InputBase, Paper, Typography } from "@mui/material";
+import { Header } from "../components/header";
+import bgi from "../img/bgi.jpg";
 
 const PhoneSignUp = () => {
   const [error, setError] = useState("");
@@ -42,52 +44,129 @@ const PhoneSignUp = () => {
     }
   };
 
-  return (
-    <>
-      <div className="p-4 box">
-        <h2 className="mb-3">Firebase Phone Auth</h2>
-        {error && <Alert variant="danger">{error}</Alert>}
-        <Form onSubmit={getOtp} style={{ display: !flag ? "block" : "none" }}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <PhoneInput
-              defaultCountry="IN"
-              value={number}
-              onChange={setNumber}
-              placeholder="Enter Phone Number"
-            />
-            <div id="recaptcha-container"></div>
-          </Form.Group>
-          <div className="button-right">
-            <Link to="/">
-              <Button variant="secondary">Cancel</Button>
-            </Link>
-            &nbsp;
-            <Button type="submit" variant="primary">
-              Send Otp
-            </Button>
-          </div>
-        </Form>
+  const navBack = () => {
+    navigate("/");
+  };
 
-        <Form onSubmit={verifyOtp} style={{ display: flag ? "block" : "none" }}>
-          <Form.Group className="mb-3" controlId="formBasicOtp">
-            <Form.Control
-              type="otp"
-              placeholder="Enter OTP"
-              onChange={(e) => setOtp(e.target.value)}
-            />
-          </Form.Group>
-          <div className="button-right">
-            <Link to="/">
-              <Button variant="secondary">Cancel</Button>
-            </Link>
-            &nbsp;
-            <Button type="submit" variant="primary">
-              Verify
-            </Button>
-          </div>
-        </Form>
-      </div>
-    </>
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${bgi})`,
+        backgroundSize: "100%",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <Header></Header>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          mx: "4%",
+          pt: "18%",
+          pb: "11%",
+
+          borderRadius: 1,
+        }}
+      >
+        <Paper
+          elevation={10}
+          style={{
+            textAlign: "left",
+            color: "black",
+            width: "40%",
+          }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            p: 6,
+            borderRadius: 4,
+          }}
+        >
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1, p: 2 }}>
+            Sign in
+          </Typography>
+
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={getOtp} style={{ display: !flag ? "block" : "none" }}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <PhoneInput
+                defaultCountry="IN"
+                value={number}
+                onChange={setNumber}
+                placeholder="Enter Phone Number"
+              />
+
+              <div
+                style={{
+                  marginTop: 20,
+                  marginLeft: 40,
+                }}
+                id="recaptcha-container"
+              ></div>
+            </Form.Group>
+            <div className="button-right">
+              <Button
+                onClick={navBack}
+                variant="contained"
+                sx={{ m: 2, background: "#1a237e", borderRadius: 4 }}
+              >
+                <Typography variant="h5" component="div">
+                  Cancel
+                </Typography>
+              </Button>
+              &nbsp;
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ m: 2, background: "#1a237e", borderRadius: 4 }}
+              >
+                <Typography variant="h5" component="div">
+                  Send Otp
+                </Typography>
+              </Button>
+            </div>
+          </Form>
+
+          <Form
+            onSubmit={verifyOtp}
+            style={{ display: flag ? "block" : "none" }}
+          >
+            <Form.Group className="mb-3" controlId="formBasicOtp">
+              <Form.Control
+                type="otp"
+                placeholder="Enter OTP"
+                onChange={(e) => setOtp(e.target.value)}
+              />
+            </Form.Group>
+            <div className="button-right">
+              <Button
+                onClick={navBack}
+                variant="contained"
+                sx={{ m: 2, background: "#1a237e", borderRadius: 4 }}
+              >
+                <Typography variant="h5" component="div">
+                  Cancel
+                </Typography>
+              </Button>
+              &nbsp;
+              {/* <Button type="submit" variant="primary">
+                Verify
+              </Button> */}
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ m: 2, background: "#1a237e", borderRadius: 4 }}
+              >
+                <Typography variant="h5" component="div">
+                  Verify
+                </Typography>
+              </Button>
+            </div>
+          </Form>
+        </Paper>
+      </Box>
+    </div>
   );
 };
 

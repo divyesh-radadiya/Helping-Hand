@@ -33,8 +33,9 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function DonationCard({ donation }) {
+export default function MyRequestCard({ request }) {
   const [expanded, setExpanded] = React.useState(false);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -55,7 +56,8 @@ export default function DonationCard({ donation }) {
             R
           </Avatar>
         }
-        title={donation.name}
+        title={request.name}
+        subheader={request.date.toString()}
       />
 
       <CardContent>
@@ -64,12 +66,24 @@ export default function DonationCard({ donation }) {
             <TableRow
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
+              <TableCell colSpan={4} component="th" scope="row">
+                <ListItem disablePadding>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={request.targetDate} />
+                </ListItem>
+              </TableCell>
+            </TableRow>
+            <TableRow
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
                     <DraftsIcon />
                   </ListItemIcon>
-                  <ListItemText primary={donation.transactionId} />
+                  <ListItemText primary={request.itemName} />
                 </ListItem>
               </TableCell>
               <TableCell component="th" scope="row">
@@ -77,7 +91,15 @@ export default function DonationCard({ donation }) {
                   <ListItemIcon>
                     <DraftsIcon />
                   </ListItemIcon>
-                  <ListItemText primary={donation.emailId} />
+                  <ListItemText primary={"Quantity: " + request.quantity} />
+                </ListItem>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                <ListItem disablePadding>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={request.type} />
                 </ListItem>
               </TableCell>
 
@@ -86,7 +108,7 @@ export default function DonationCard({ donation }) {
                   <ListItemIcon>
                     <DraftsIcon />
                   </ListItemIcon>
-                  <ListItemText primary={donation.mobile} />
+                  <ListItemText primary={request.traMod} />
                 </ListItem>
               </TableCell>
             </TableRow>
@@ -94,7 +116,7 @@ export default function DonationCard({ donation }) {
         </Table>
       </CardContent>
       <CardActions disableSpacing>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, px: 3 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, p: 2 }}>
           Details
         </Typography>
         <ExpandMore
@@ -110,6 +132,25 @@ export default function DonationCard({ donation }) {
         <CardContent>
           <Table aria-label="simple table">
             <TableBody>
+              <TableRow>
+                <TableCell component="th" scope="row">
+                  <ListItem disablePadding>
+                    <ListItemIcon>
+                      <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={request.emailId} />
+                  </ListItem>
+                </TableCell>
+
+                <TableCell component="th" scope="row">
+                  <ListItem disablePadding>
+                    <ListItemIcon>
+                      <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={request.mobile} />
+                  </ListItem>
+                </TableCell>
+              </TableRow>
               <TableRow
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
@@ -120,13 +161,13 @@ export default function DonationCard({ donation }) {
                     </ListItemIcon>
                     <ListItemText
                       primary={
-                        donation.address1 +
+                        request.address1 +
                         ", " +
-                        donation.address2 +
+                        request.address2 +
                         ", " +
-                        donation.city +
+                        request.city +
                         ". " +
-                        donation.pinCode
+                        request.pinCode
                       }
                     />
                   </ListItem>
@@ -140,20 +181,48 @@ export default function DonationCard({ donation }) {
                     <ListItemIcon>
                       <DraftsIcon />
                     </ListItemIcon>
-                    <ListItemText primary={donation.details} />
+                    <ListItemText primary={request.details} />
                   </ListItem>
                 </TableCell>
               </TableRow>
             </TableBody>
           </Table>
-          <Button
-            variant="contained"
-            sx={{ m: 1, background: "#1a237e", borderRadius: 4 }}
-          >
-            <Typography variant="h6" component="div">
-              Delete
-            </Typography>
-          </Button>
+          <Table aria-label="simple table">
+            <TableBody>
+              {request.status == "Requested" && (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Button
+                      variant="contained"
+                      sx={{ m: 1, background: "#1a237e", borderRadius: 4 }}
+                    >
+                      <Typography variant="h6" component="div">
+                        Requested
+                      </Typography>
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              )}
+              {request.status != "Requested" && (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Button
+                      variant="contained"
+                      sx={{ m: 1, background: "#1a237e", borderRadius: 4 }}
+                    >
+                      <Typography variant="h6" component="div">
+                        {request.status}
+                      </Typography>
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
         </CardContent>
       </Collapse>
     </Card>

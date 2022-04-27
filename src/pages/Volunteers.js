@@ -1,9 +1,11 @@
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
   InputBase,
   Paper,
-  Snackbar,
   Table,
   TableBody,
   TableCell,
@@ -14,11 +16,11 @@ import axios from "axios";
 import React, { createRef, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { base } from "../components/baseUrl";
-// import { useUserAuth } from "../context/UserAuthContext";
+import { useUserAuth } from "../context/UserAuthContext";
 import { Header } from "../components/header";
 
 const Volunteers = () => {
-  // const { logOut, user } = useUserAuth();
+  const { user } = useUserAuth();
 
   // eslint-disable-next-line prettier/prettier
   const nameRef = createRef();
@@ -99,10 +101,7 @@ const Volunteers = () => {
   };
   const [open, setOpen] = React.useState(false);
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleClose = () => {
     navigate("/");
     setOpen(false);
   };
@@ -114,12 +113,23 @@ const Volunteers = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Snackbar
+      <Dialog
         open={open}
-        autoHideDuration={3000}
         onClose={handleClose}
-        message="Data updated successfully !!"
-      />
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Data updated successfully !!"}
+        </DialogTitle>
+
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Header></Header>
 
       <Box
@@ -229,7 +239,8 @@ const Volunteers = () => {
                       }}
                     >
                       <InputBase
-                        type="number"
+                        value={user["phoneNumber"]}
+                        readOnly
                         sx={{ m: 1, ml: 4, flex: 1 }}
                         placeholder="Mobile No*"
                         inputRef={mobileRef}

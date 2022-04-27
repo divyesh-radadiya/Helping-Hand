@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   RecaptchaVerifier,
   signInWithPhoneNumber,
+  browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -17,6 +18,8 @@ export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   function logIn(email, password) {
+    auth.setPersistence(browserSessionPersistence);
+
     return signInWithEmailAndPassword(auth, email, password);
   }
   function signUp(email, password) {
@@ -37,6 +40,9 @@ export function UserAuthContextProvider({ children }) {
       auth
     );
     recaptchaVerifier.render();
+
+    auth.setPersistence(browserSessionPersistence);
+
     return signInWithPhoneNumber(auth, number, recaptchaVerifier);
   }
 

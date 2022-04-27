@@ -15,3 +15,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app;
+
+// export const authWithEmail = setPersistence(auth, browserSessionPersistence)
+//   .then(() => {
+//     return signInWithEmailAndPassword(auth, email, password);
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });

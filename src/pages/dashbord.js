@@ -10,6 +10,7 @@ const Dashbord = () => {
   const navIndividualDonation = () => {
     navigate("/individualDonation");
   };
+
   return (
     <div
       style={{

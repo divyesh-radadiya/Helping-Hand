@@ -1,6 +1,10 @@
 import {
   AppBar,
+  Avatar,
   Button,
+  Card,
+  CardActions,
+  CardHeader,
   IconButton,
   Menu,
   MenuItem,
@@ -14,8 +18,7 @@ import { useUserAuth } from "../context/UserAuthContext";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
 import { ReactComponent as Logo } from "../img/logo.svg";
-import axios from "axios";
-import { base } from "./baseUrl";
+import { red } from "@mui/material/colors";
 
 export const Header = () => {
   const { logOut, user } = useUserAuth();
@@ -48,6 +51,9 @@ export const Header = () => {
   const handleLogin = () => {
     navigate("/phonesignup");
   };
+  const navMyRequestes = () => {
+    navigate("/myRequests");
+  };
 
   const navFoodDonation = () => {
     navigate("/foodDonation");
@@ -76,22 +82,6 @@ export const Header = () => {
     } catch (error) {
       console.log(error.message);
     }
-  };
-
-  const onFun = () => {
-    var config = {
-      method: "get",
-      url: base + "/api/ngo/getNgo",
-      headers: {},
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   };
 
   return (
@@ -200,8 +190,31 @@ export const Header = () => {
               open={Boolean(anchorEl2)}
               onClose={handleClose2}
             >
-              <MenuItem onClick={onFun}>Profile</MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem>
+                {" "}
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    borderRadius: 0,
+                    boxShadow: "none",
+                  }}
+                >
+                  <CardHeader
+                    avatar={
+                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        R
+                      </Avatar>
+                    }
+                    title={user["phoneNumber"]}
+                  />
+
+                  <CardActions>
+                    <Button onClick={navMyRequestes}>My Requests</Button>
+                    <Button onClick={handleLogout}>Logout</Button>
+                  </CardActions>
+                </Card>
+              </MenuItem>
             </Menu>
           </div>
         )}

@@ -12,11 +12,12 @@ import { red } from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
-  Snackbar,
   Table,
   TableBody,
   TableCell,
@@ -24,7 +25,6 @@ import {
 } from "@mui/material";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { base } from "./baseUrl";
 
 const ExpandMore = styled((props) => {
@@ -54,6 +54,7 @@ export default function RequestCard({ request }) {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
+        handleClickOpen();
       })
       .catch(function (error) {
         console.log(error);
@@ -62,7 +63,7 @@ export default function RequestCard({ request }) {
   const onDecline = () => {
     var config = {
       method: "get",
-      url: base + "api/request/unsetStatus/" + request.userId,
+      url: base + "/api/request/unsetStatus/" + request.userId,
       headers: {},
     };
 
@@ -70,22 +71,40 @@ export default function RequestCard({ request }) {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
+        handleClickOpen();
       })
       .catch(function (error) {
         console.log(error);
       });
   };
-  const [open, setOpen] = React.useState(false);
 
-  const navigate = useNavigate();
+  const onDelete = () => {
+    var config = {
+      method: "get",
+      url: base + "/api/request/delete/" + request.userId,
+      headers: {},
+    };
+    axios(config)
+      .then(function (response) {
+        setOpen(true);
+        handleClickOpen();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleClose = () => {
     window.location.reload(false);
     setOpen(false);
   };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <Card
       sx={{
@@ -96,12 +115,23 @@ export default function RequestCard({ request }) {
         borderRadius: 4,
       }}
     >
-      <Snackbar
+      <Dialog
         open={open}
-        autoHideDuration={6000}
         onClose={handleClose}
-        message="Data updated successfully !!"
-      />
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Data updated successfully !!"}
+        </DialogTitle>
+
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -280,6 +310,17 @@ export default function RequestCard({ request }) {
                     >
                       <Typography variant="h6" component="div">
                         {request.status}
+                      </Typography>
+                    </Button>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Button
+                      variant="contained"
+                      onClick={onDelete}
+                      sx={{ m: 1, background: "#1a237e", borderRadius: 4 }}
+                    >
+                      <Typography variant="h6" component="div">
+                        Delete
                       </Typography>
                     </Button>
                   </TableCell>
