@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
-  Button,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -20,7 +19,11 @@ import {
   TableCell,
   TableRow,
 } from "@mui/material";
-import DraftsIcon from "@mui/icons-material/Drafts";
+
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import CommentIcon from "@mui/icons-material/Comment";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -67,7 +70,7 @@ export default function EnquiryCard({ enquiry }) {
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <EmailIcon />
                   </ListItemIcon>
                   <ListItemText primary={enquiry.emailId} />
                 </ListItem>
@@ -76,7 +79,7 @@ export default function EnquiryCard({ enquiry }) {
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <PhoneIcon />
                   </ListItemIcon>
                   <ListItemText primary={enquiry.mobile} />
                 </ListItem>
@@ -108,7 +111,7 @@ export default function EnquiryCard({ enquiry }) {
                 <TableCell colSpan={2} component="th" scope="row">
                   <ListItem disablePadding>
                     <ListItemIcon>
-                      <DraftsIcon />
+                      <ApartmentIcon />
                     </ListItemIcon>
                     <ListItemText
                       primary={
@@ -130,7 +133,7 @@ export default function EnquiryCard({ enquiry }) {
                 <TableCell colSpan={2} component="th" scope="row">
                   <ListItem disablePadding>
                     <ListItemIcon>
-                      <DraftsIcon />
+                      <CommentIcon />
                     </ListItemIcon>
                     <ListItemText primary={enquiry.details} />
                   </ListItem>
@@ -138,14 +141,6 @@ export default function EnquiryCard({ enquiry }) {
               </TableRow>
             </TableBody>
           </Table>
-          <Button
-            variant="contained"
-            sx={{ m: 1, background: "#1a237e", borderRadius: 4 }}
-          >
-            <Typography variant="h6" component="div">
-              Delete
-            </Typography>
-          </Button>
         </CardContent>
       </Collapse>
     </Card>

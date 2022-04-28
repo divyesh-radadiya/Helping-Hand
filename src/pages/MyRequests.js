@@ -8,6 +8,7 @@ import axios from "axios";
 import { base } from "../components/baseUrl";
 import { Header } from "../components/header";
 import MyRequestCard from "../components/myRequestCard";
+import { useUserAuth } from "../context/UserAuthContext";
 
 const MyRequests = () => {
   useEffect(() => {
@@ -16,11 +17,13 @@ const MyRequests = () => {
 
   const [requestList, setRequestList] = useState([]);
 
+  const { user } = useUserAuth();
+
   const getData = () => {
     handleToggle();
     var config = {
       method: "get",
-      url: base + "/api/request/getRequests/23232",
+      url: base + "/api/request/getRequests/" + user["phoneNumber"],
       headers: {},
     };
 

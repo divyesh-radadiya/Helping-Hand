@@ -9,7 +9,18 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import LabelIcon from "@mui/icons-material/Label";
+import NumbersIcon from "@mui/icons-material/Numbers";
+import CategoryIcon from "@mui/icons-material/Category";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import CommentIcon from "@mui/icons-material/Comment";
+
 import {
   Button,
   ListItem,
@@ -20,7 +31,6 @@ import {
   TableCell,
   TableRow,
 } from "@mui/material";
-import DraftsIcon from "@mui/icons-material/Drafts";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -69,7 +79,7 @@ export default function MyRequestCard({ request }) {
               <TableCell colSpan={4} component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <DateRangeIcon />
                   </ListItemIcon>
                   <ListItemText primary={request.targetDate} />
                 </ListItem>
@@ -81,7 +91,7 @@ export default function MyRequestCard({ request }) {
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <LabelIcon />
                   </ListItemIcon>
                   <ListItemText primary={request.itemName} />
                 </ListItem>
@@ -89,7 +99,7 @@ export default function MyRequestCard({ request }) {
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <NumbersIcon />
                   </ListItemIcon>
                   <ListItemText primary={"Quantity: " + request.quantity} />
                 </ListItem>
@@ -97,7 +107,7 @@ export default function MyRequestCard({ request }) {
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <CategoryIcon />
                   </ListItemIcon>
                   <ListItemText primary={request.type} />
                 </ListItem>
@@ -106,7 +116,7 @@ export default function MyRequestCard({ request }) {
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <DirectionsCarIcon />
                   </ListItemIcon>
                   <ListItemText primary={request.traMod} />
                 </ListItem>
@@ -136,7 +146,7 @@ export default function MyRequestCard({ request }) {
                 <TableCell component="th" scope="row">
                   <ListItem disablePadding>
                     <ListItemIcon>
-                      <DraftsIcon />
+                      <EmailIcon />
                     </ListItemIcon>
                     <ListItemText primary={request.emailId} />
                   </ListItem>
@@ -145,7 +155,7 @@ export default function MyRequestCard({ request }) {
                 <TableCell component="th" scope="row">
                   <ListItem disablePadding>
                     <ListItemIcon>
-                      <DraftsIcon />
+                      <PhoneIcon />
                     </ListItemIcon>
                     <ListItemText primary={request.mobile} />
                   </ListItem>
@@ -157,7 +167,7 @@ export default function MyRequestCard({ request }) {
                 <TableCell colSpan={2} component="th" scope="row">
                   <ListItem disablePadding>
                     <ListItemIcon>
-                      <DraftsIcon />
+                      <ApartmentIcon />
                     </ListItemIcon>
                     <ListItemText
                       primary={
@@ -179,7 +189,7 @@ export default function MyRequestCard({ request }) {
                 <TableCell colSpan={2} component="th" scope="row">
                   <ListItem disablePadding>
                     <ListItemIcon>
-                      <DraftsIcon />
+                      <CommentIcon />
                     </ListItemIcon>
                     <ListItemText primary={request.details} />
                   </ListItem>

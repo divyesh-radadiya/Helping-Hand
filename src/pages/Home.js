@@ -66,7 +66,7 @@ const Home = () => {
     handleToggle();
     var config = {
       method: "get",
-      url: base + "/api/ngo/getNgo",
+      url: base + "/api/ngo/getNgo/" + user["email"],
       headers: {},
     };
 
