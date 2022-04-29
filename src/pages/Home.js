@@ -41,6 +41,7 @@ function a11yProps(index) {
 }
 
 const Home = () => {
+   const { logOut, user } = useUserAuth();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -48,7 +49,7 @@ const Home = () => {
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, [user]);
 
   const [name, setName] = useState("");
   const [address1, setAddress1] = useState("");
@@ -130,7 +131,6 @@ const Home = () => {
       });
   };
 
-  const { logOut, user } = useUserAuth();
 
   const [anchorEl2, setAnchorEl2] = React.useState(null);
 
