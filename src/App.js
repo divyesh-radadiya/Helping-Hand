@@ -12,6 +12,9 @@ import ClothesDonation from "./pages/ClothesDonation";
 import EmailSignin from "./pages/EmailSignIn";
 import NGOProtectedRoute from "./pages/NGOProctedPoute";
 import MyRequests from "./pages/MyRequests";
+import { Admin } from "./pages/admin";
+import AdminPhoneSignUp from "./pages/AdminPhoneSignUp";
+import AdProtectedRoute from "./pages/AdProtectedRoute";
 
 function App() {
   return (
@@ -28,8 +31,16 @@ function App() {
         <Route path="/" element={<Dashbord />} />
         <Route path="/dashbord" element={<Dashbord />} />
         <Route path="/phonesignup" element={<PhoneSignUp />} />
+        <Route path="/adminphonesignup" element={<AdminPhoneSignUp />} />
         <Route path="/emailsignin" element={<EmailSignin />} />
-
+        <Route
+          path="/admin"
+          element={
+            <AdProtectedRoute>
+              <Admin />
+            </AdProtectedRoute>
+          }
+        />
         <Route
           path="/myRequests"
           element={
