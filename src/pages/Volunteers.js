@@ -84,6 +84,7 @@ const Volunteers = () => {
       url: base + "/api/volunteer/add",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
       },
       data: data,
     };

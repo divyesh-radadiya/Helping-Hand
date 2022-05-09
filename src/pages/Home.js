@@ -41,7 +41,7 @@ function a11yProps(index) {
 }
 
 const Home = () => {
-   const { logOut, user } = useUserAuth();
+  const { logOut, user } = useUserAuth();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -68,7 +68,10 @@ const Home = () => {
     var config = {
       method: "get",
       url: base + "/api/ngo/getNgo/" + user["email"],
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
+      },
     };
 
     axios(config)
@@ -130,7 +133,6 @@ const Home = () => {
         handleClose();
       });
   };
-
 
   const [anchorEl2, setAnchorEl2] = React.useState(null);
 

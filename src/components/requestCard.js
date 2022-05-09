@@ -25,7 +25,6 @@ import {
 } from "@mui/material";
 
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import LabelIcon from "@mui/icons-material/Label";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import CategoryIcon from "@mui/icons-material/Category";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
@@ -33,9 +32,13 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import CommentIcon from "@mui/icons-material/Comment";
+import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import ManIcon from "@mui/icons-material/Man";
 
 import axios from "axios";
 import { base } from "./baseUrl";
+import { useUserAuth } from "../context/UserAuthContext";
+import { SendSMS } from "./smsService";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -53,16 +56,22 @@ export default function RequestCard({ request }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const { user } = useUserAuth();
+
   const onAccept = () => {
     var config = {
       method: "get",
       url: base + "/api/request/setStatus/" + request.userId,
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
+      },
     };
 
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        // SendSMS("+919773180438", "Your request was Accepted.");
         setOpen(true);
         handleClickOpen();
       })
@@ -70,17 +79,22 @@ export default function RequestCard({ request }) {
         console.log(error);
       });
   };
+
   const onDecline = () => {
     var config = {
       method: "get",
       url: base + "/api/request/unsetStatus/" + request.userId,
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
+      },
     };
 
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
+        // SendSMS("+919773180438", "Your request was Declined !!!!");
         handleClickOpen();
       })
       .catch(function (error) {
@@ -92,7 +106,10 @@ export default function RequestCard({ request }) {
     var config = {
       method: "get",
       url: base + "/api/request/delete/" + request.userId,
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
+      },
     };
     axios(config)
       .then(function (response) {
@@ -173,7 +190,11 @@ export default function RequestCard({ request }) {
               <TableCell component="th" scope="row">
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <LabelIcon />
+                    {request.role == "Clothes" ? (
+                      <ManIcon />
+                    ) : (
+                      <LocalDiningIcon />
+                    )}
                   </ListItemIcon>
                   <ListItemText primary={request.itemName} />
                 </ListItem>

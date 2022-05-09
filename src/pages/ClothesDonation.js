@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { base } from "../components/baseUrl";
 import { useUserAuth } from "../context/UserAuthContext";
+import { SendSMS } from "../components/smsService";
 
 const ClothesDonation = () => {
   const { user } = useUserAuth();
@@ -126,6 +127,7 @@ const ClothesDonation = () => {
       url: base + "/api/request/add",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
       },
       data: data,
     };
@@ -133,6 +135,8 @@ const ClothesDonation = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        // SendSMS("+919773180438", "You have new Cloths donation request.");
+
         setOpen(true);
       })
       .catch(function (error) {

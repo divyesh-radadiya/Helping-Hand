@@ -73,6 +73,9 @@ export const Header = () => {
   const navHome = () => {
     navigate("/home");
   };
+  const navAdmin = () => {
+    navigate("/adminphonesignup");
+  };
 
   const handleLogout = async () => {
     try {
@@ -160,6 +163,7 @@ export const Header = () => {
             >
               <MenuItem onClick={handleLogin}>As Donor</MenuItem>
               <MenuItem onClick={navHome}>As NGO</MenuItem>
+              <MenuItem onClick={navAdmin}>As Admin</MenuItem>
             </Menu>
           </div>
         )}

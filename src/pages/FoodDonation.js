@@ -24,6 +24,7 @@ import { useUserAuth } from "../context/UserAuthContext";
 import bgi from "../img/bgi.jpg";
 import axios from "axios";
 import { base } from "../components/baseUrl";
+import { SendSMS } from "../components/smsService";
 
 const FoodDonaton = () => {
   const { user } = useUserAuth();
@@ -127,6 +128,7 @@ const FoodDonaton = () => {
       url: base + "/api/request/add",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
       },
       data: data,
     };
@@ -134,6 +136,7 @@ const FoodDonaton = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        // SendSMS("+919773180438", "You have new Food donation request.");
         setOpen(true);
       })
       .catch(function (error) {

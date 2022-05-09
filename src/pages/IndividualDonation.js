@@ -88,6 +88,7 @@ const IndividualDonation = () => {
       url: base + "/api/donor/add",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
       },
       data: data,
     };

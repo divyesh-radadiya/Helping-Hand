@@ -24,7 +24,10 @@ const MyRequests = () => {
     var config = {
       method: "get",
       url: base + "/api/request/getRequests/" + user["phoneNumber"],
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
+      },
     };
 
     axios(config)
