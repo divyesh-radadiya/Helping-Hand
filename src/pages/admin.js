@@ -97,6 +97,7 @@ export const Admin = () => {
       url: base + "/api/ngo/add",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + user["accessToken"],
       },
       data: data,
     };
