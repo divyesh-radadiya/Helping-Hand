@@ -135,7 +135,7 @@ const ClothesDonation = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        // SendSMS("+919773180438", "You have new Cloths donation request.");
+        SendSMS("+919773180438", "You have new Cloths donation request.");
 
         setOpen(true);
       })

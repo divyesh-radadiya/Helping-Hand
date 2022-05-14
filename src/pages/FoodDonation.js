@@ -136,7 +136,7 @@ const FoodDonaton = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        // SendSMS("+919773180438", "You have new Food donation request.");
+        SendSMS("+919773180438", "You have new Food donation request.");
         setOpen(true);
       })
       .catch(function (error) {

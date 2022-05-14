@@ -71,7 +71,7 @@ export default function RequestCard({ request }) {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        // SendSMS("+919773180438", "Your request was Accepted.");
+        SendSMS("+919773180438", "Your request was Accepted.");
         setOpen(true);
         handleClickOpen();
       })
@@ -94,7 +94,7 @@ export default function RequestCard({ request }) {
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         setOpen(true);
-        // SendSMS("+919773180438", "Your request was Declined !!!!");
+        SendSMS("+919773180438", "Your request was Declined !!!!");
         handleClickOpen();
       })
       .catch(function (error) {
